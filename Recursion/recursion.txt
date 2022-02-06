@@ -1,0 +1,30 @@
+Recursion - basically consists of three steps
+
+1. Base case
+2. Recursive relation (function relation)
+3. Self work (work done on instance)
+
+Base case:
+ 1. counting problems(factorial, fibonacci, sorting)
+    look for smallest valid value and possible values of params for those values.
+ 2. getting combinations(path, valid string, permutations)
+    look for last valid params values on which we can declare the combination upto that point as a valid combination and print that combination or push it to combinations array.
+
+Recursive relation
+ 1. counting problems
+    relation requires params to be made smaller
+ 2. getting combinations
+    relation requires iterators as params
+
+Self work
+ 1. counting problems/getting combinations -> depends on problem
+    
+    
+    
+    
+Backtracking - recursively building up solution to get to a point which proves the solution is valid or it proves that the solution is invalid -> and we track back the steps of the invalid solution
+
+
+Difference -> 
+   1. Recursion is a method or problem solving paradigm where a problem is broken down into smaller subproblems to get a solution/solution set.
+   Backtracking is an algorithm to get possible valid solutions and is usually implemeted recursively
