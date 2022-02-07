@@ -39,9 +39,9 @@ class Solution
 		{
 		    // Code here there
 		    vector<string> permVector;
-      //       int n = S.size();
-		    // permutations(permVector, S, 0, n);
-		    permut(permVector, S, "");
+            int n = S.size();
+		    permutations(permVector, S, 0, n);
+		    // permut(permVector, S, "");
 		    return permVector;
 		}
 };
