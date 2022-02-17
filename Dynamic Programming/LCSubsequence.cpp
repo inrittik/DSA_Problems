@@ -25,6 +25,24 @@ public:
         int n=text1.size();
         int m=text2.size();
         dp.resize(n+1, vector<int> (m+1, -1));
+        // int i=n-1;
+        // int j = m - 1;
+        // string s;
+        // while(i>0 & j>0){
+        //     if(text1[i]==text2[j]){
+        //         s.push_back(text1[i]);
+        //         i--;
+        //         j--;
+        //     }
+        //     else{
+        //         if(dp[i-1][j]>dp[i][j-1])
+        //             i--;
+        //         else
+        //             j--;
+        //     }
+        // }
+        // reverse(s.begin(), s.end())
+        // cout << s << endl;
         return solution(text1, text2, n, m);
     }
 };
