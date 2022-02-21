@@ -36,6 +36,19 @@ class Solution
            }
        }
        return dp[n][W];
+
+
+       //most optimised ->
+       vector<int> dp(W+1, 0);
+        
+        for(int i=0; i<N; ++i){
+            for(int j=W; j>=0; --j){
+                if(wt[i]<=j){
+                    dp[j]=max(val[i]+dp[j-wt[i]], dp[j]);
+                }
+            }
+        }
+        return dp[W];
     }
 };
 
