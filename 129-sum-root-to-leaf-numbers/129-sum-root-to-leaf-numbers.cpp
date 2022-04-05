@@ -14,10 +14,13 @@ public:
     int getSum(TreeNode* root, int level, int sum){
         if(root->left==NULL && root->right==NULL) return sum*10+root->val;
         
-        if(root->right==NULL) return getSum(root->left, level+1, sum*10+root->val);
-        if(root->left==NULL) return getSum(root->right, level+1, sum*10+root->val);
+        sum*=10;
+        sum+=root->val;
         
-        return getSum(root->left, level+1, sum*10+root->val)+getSum(root->right, level+1, sum*10+root->val);
+        if(root->right==NULL) return getSum(root->left, level+1, sum);
+        if(root->left==NULL) return getSum(root->right, level+1, sum);
+        
+        return getSum(root->left, level+1, sum)+getSum(root->right, level+1, sum);
     }
     int sumNumbers(TreeNode* root) {
         if(root==NULL) return 0;
