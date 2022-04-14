@@ -12,7 +12,7 @@
 class Solution {
 public:
     int kthSmallest(TreeNode* root, int k) {
-        vector<TreeNode*> tree;
+        int cnt = 0;
         stack<TreeNode*> s;
         while(true){
             if(root){
@@ -23,10 +23,11 @@ public:
                 if(s.empty()) break;
                 root = s.top();
                 s.pop();
-                tree.push_back(root);
+                if(++cnt==k) return root->val;
                 root = root->right;
             }
         }
-        return tree[k-1]->val;
+        
+        return -1;
     }
 };
