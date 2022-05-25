@@ -7,12 +7,13 @@ public:
         int preSum=0;
         mp[0]=1;
         for(int i=0; i<n; ++i) {
-            preSum = (preSum+nums[i])%k;
-            if(preSum<0) preSum+=k;
-            if(mp.find(preSum) != mp.end()){
-                cnt += mp[preSum];
+            preSum += nums[i];
+            int val = preSum%k;
+            if(val<0) val+=k;
+            if(mp.find(val) != mp.end()){
+                cnt += mp[val];
             }
-            mp[preSum]++;
+            mp[val]++;
         }
         return cnt;
     }
