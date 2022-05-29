@@ -4,11 +4,12 @@ public:
         int n=nums.size();
         int dist=0;
         int i=0;
-        while(i<n && i<=dist){
-            dist=max(dist, i+nums[i]);
+        while(i<n){
+            dist=max(i+nums[i], dist);
+            if(dist>=n-1) return true;
+            else if(dist<=i) return false;
             i++;
         }
-        if(dist>=n-1) return true;
-        else return false;
+        return false;
     }
 };
