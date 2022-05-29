@@ -11,7 +11,8 @@ public:
         int ans=n;
         for(int i=0; i<n; ++i){
             sum = (sum+nums[i])%p;
-            int val = (sum-rem+p)%p;
+            int val = sum-rem;
+            if(val<0) val=(val+p)%p;
             if(mp.find(val)!=mp.end()){
                 ans=min(ans, i-mp[val]);
             }
