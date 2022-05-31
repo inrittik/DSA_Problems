@@ -43,38 +43,39 @@ int main()
 
 /* The functions which 
 builds the segment tree */
-int len;
-int *constructST(int arr[],int n)
-{
-  //Your code here
-    int num = (ceil)(log2(n));
-    len = (1<<num);
-    int* tree = (int*)malloc(2*len * sizeof(int));
-    for(int i=len; i<len+n; i++)
-        tree[i] = arr[i-len];
-    for(int i=len-1; i>=1; i--)
-        tree[i] = min(tree[2*i], tree[2*i+1]);
-    return tree;
+void build(int arr[] ,int *st, int ss, int se ,int si){
+    if(ss == se){
+        st[si] = arr[ss];
+        return ;
+    }
+    int mid = ss + (se-ss)/2;
+    build(arr,st,ss,mid,si*2+1);
+    build(arr,st,mid+1,se,si*2+2);
+    
+    st[si] = min(st[si*2+1],st[si*2+2]);
+    return;
 }
 
-int rangeQuery(int tree[], int a, int b, int lo, int hi, int pos){
-    if(a<=lo && b>=hi){
-        return tree[pos];
-    }
-    if(a>hi || b<lo){
+int *constructST(int arr[],int n)
+{
+  int *st = new int[4*n + 1];
+  build(arr,st,0,n-1,0);
+  return st;
+}
+
+int getmin(int *st , int ss ,int se , int qs , int qe ,int si) {
+    if(se<qs || ss>qe)    {
         return INT_MAX;
     }
+    if(ss>=qs && qe>=se){
+        return st[si];
+    }
     
-    int mid=(lo+hi)/2;
-    
-    return min(rangeQuery(tree, a, b, lo, mid, 2*pos),rangeQuery(tree, a, b, mid+1, hi, 2*pos+1));
+    int mid = ss + (se-ss)/2;
+    return min(getmin(st,ss,mid,qs,qe,2*si+1),getmin(st,mid+1,se,qs,qe,2*si+2));
 }
-/* The functions returns the
- min element in the range
- from a and b */
+
 int RMQ(int st[] , int n, int a, int b)
 {
-//Your code here
-    return rangeQuery(st, a, b, 0, len-1, 1);
-    
+    return getmin(st,0,n-1,a,b,0);
 }
