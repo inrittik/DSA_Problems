@@ -41,8 +41,6 @@ int main()
 // } Driver Code Ends
 
 
-/* The functions which 
-builds the segment tree */
 void build(int arr[] ,int *st, int ss, int se ,int si){
     if(ss == se){
         st[si] = arr[ss];
@@ -55,27 +53,29 @@ void build(int arr[] ,int *st, int ss, int se ,int si){
     st[si] = min(st[si*2+1],st[si*2+2]);
     return;
 }
-
 int *constructST(int arr[],int n)
 {
-  int *st = new int[4*n + 1];
-  build(arr,st,0,n-1,0);
-  return st;
+  int* tree = new int[4*n+1];
+  build(arr, tree, 0, n-1, 0);
+  
+  return tree;
 }
 
-int getmin(int *st , int ss ,int se , int qs , int qe ,int si) {
-    if(se<qs || ss>qe)    {
+int rangeQuery(int* tree, int a, int b, int lo, int hi, int pos){
+    if(hi<a || lo>b){
         return INT_MAX;
     }
-    if(ss>=qs && qe>=se){
-        return st[si];
+    if(a<=lo && b>=hi){
+        return tree[pos];
     }
     
-    int mid = ss + (se-ss)/2;
-    return min(getmin(st,ss,mid,qs,qe,2*si+1),getmin(st,mid+1,se,qs,qe,2*si+2));
+    int mid=lo+(hi-lo)/2;
+    
+    return min(rangeQuery(tree, a, b, lo, mid, 2*pos+1),rangeQuery(tree, a, b, mid+1, hi, 2*pos+2));
 }
 
 int RMQ(int st[] , int n, int a, int b)
 {
-    return getmin(st,0,n-1,a,b,0);
+    return rangeQuery(st, a, b, 0, n-1, 0);
+    
 }
