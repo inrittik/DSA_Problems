@@ -41,22 +41,22 @@ int main()
 // } Driver Code Ends
 
 
-void build(int arr[] ,int *st, int ss, int se ,int si){
-    if(ss == se){
-        st[si] = arr[ss];
-        return ;
+void constructTree(int arr[], int* tree, int lo, int hi, int pos){
+    if(lo==hi){
+        tree[pos]=arr[lo];
+        return;
     }
-    int mid = ss + (se-ss)/2;
-    build(arr,st,ss,mid,si*2+1);
-    build(arr,st,mid+1,se,si*2+2);
+    int mid=lo+(hi-lo)/2;
     
-    st[si] = min(st[si*2+1],st[si*2+2]);
-    return;
+    constructTree(arr, tree, lo, mid, 2*pos+1);
+    constructTree(arr, tree, mid+1, hi, 2*pos+2);
+    
+    tree[pos] = min(tree[2*pos+1],tree[2*pos+2]);
 }
 int *constructST(int arr[],int n)
 {
   int* tree = new int[4*n+1];
-  build(arr, tree, 0, n-1, 0);
+  constructTree(arr, tree, 0, n-1, 0);
   
   return tree;
 }
