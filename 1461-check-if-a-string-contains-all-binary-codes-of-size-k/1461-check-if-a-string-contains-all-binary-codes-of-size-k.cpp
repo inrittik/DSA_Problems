@@ -15,7 +15,7 @@ public:
             j++;
         }
         
-        long long num = pow(2, k);
+        int num = pow(2, k);
         
         if(mp.size()<num) return false;
         else return true;
