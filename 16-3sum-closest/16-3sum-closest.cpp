@@ -7,20 +7,20 @@ public:
         int sign = 1;
         if((nums[n-1]+nums[n-2]+nums[n-3])<target) sign=-1;
         for(int i=0; i<n; ++i){
-            int sum = nums[i];
             int lo = 0, hi = n-1;
             while(lo<hi){
+                int sum = nums[i] + nums[lo] + nums[hi];
                 if(lo!=i && hi!=i){
-                    if(abs(target-(sum+nums[lo]+nums[hi]))<mnSum){
-                        mnSum = abs(target-(sum+nums[lo]+nums[hi]));
-                        if((sum+nums[lo]+nums[hi])<target){
+                    if(abs(target-sum)<mnSum){
+                        mnSum = abs(target-sum);
+                        if(sum<target){
                             sign = -1;
                         }
                     }
-                    if(sum+nums[lo]+nums[hi]<target){
+                    if(sum<target){
                         lo++;
                     }
-                    else if(sum+nums[lo]+nums[hi]>target){
+                    else if(sum>target){
                         hi--;
                     }
                     else{
