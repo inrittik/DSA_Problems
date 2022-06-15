@@ -12,7 +12,7 @@ public:
             for(int i = 0; i < s.size(); i++) {
                 string prev = s.substr(0, i) + s.substr(i + 1);
                 if (mp.find(prev) != mp.end()) {
-                    mp[s] = mp[prev] + 1;
+                    mp[s] = max(mp[s], mp[prev] + 1);
                     res = max(res, mp[s]);
                 }
             }
