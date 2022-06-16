@@ -3,10 +3,10 @@ public:
     int numSplits(string s) {
         int n = s.size();
         vector<int> left(n), right(n);
-        unordered_set<char>m1,m2;
+        unordered_map<char, int> m1,m2;
         for(int i=0; i<n; ++i){
-            m1.insert(s[i]);
-            m2.insert(s[n-1-i]);
+            m1[s[i]]++;
+            m2[s[n-1-i]]++;
             
             left[i] = m1.size();
             right[n-1-i] = m2.size();
