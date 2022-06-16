@@ -2,31 +2,18 @@ class Solution {
 public:
     int numSplits(string s) {
         int n = s.size();
-        vector<int> v(26);
-        unordered_map<int, int> left;
-        unordered_map<int, int> right;
-        left[-1] = 0;
+        vector<int> left(n), right(n);
+        unordered_set<char>m1,m2;
         for(int i=0; i<n; ++i){
-            if(v[s[i]-'a']==0) {
-                left[i] = left[i-1]+1;
-                v[s[i]-'a']++;
-            }
-            else left[i] = left[i-1];
+            m1.insert(s[i]);
+            m2.insert(s[n-1-i]);
+            
+            left[i] = m1.size();
+            right[n-1-i] = m2.size();
         }
-        right[n] = 0;
-        v.clear();
-        v.resize(26);
-        for(int i=n-1; i>=0; --i){
-            if(v[s[i]-'a']==0) {
-                right[i] = right[i+1]+1;
-                v[s[i]-'a']++;
-            }
-            else right[i] = right[i+1];
-        }
-        
         int ans = 0;
-        for(int i=0; i<n; ++i){
-            if(left[i]==right[i+1]) ans++;
+        for(int i=1; i<n; ++i){
+            if(left[i-1]==right[i]) ans++;
         }
         return ans;
     }
