@@ -1,14 +1,15 @@
 class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
-        vector<vector<int>> dp(nums.size()+1, vector<int>(nums.size()+1, 0));
         int n = nums.size();
+        vector<int> next(n+1, 0), cur(n+1);
         for(int ind = n-1; ind>=0; --ind){
             for(int prev_ind = ind-1; prev_ind>=-1; --prev_ind){
-                if(prev_ind==-1 || nums[ind]>nums[prev_ind]) dp[ind][prev_ind+1]=max(dp[ind+1][prev_ind+1], dp[ind+1][ind+1]+1);
-                else dp[ind][prev_ind+1]=dp[ind+1][prev_ind+1];
+                if(prev_ind==-1 || nums[ind]>nums[prev_ind]) cur[prev_ind+1]=max(next[prev_ind+1], next[ind+1]+1);
+                else cur[prev_ind+1]=next[prev_ind+1];
             }
+            next = cur;
         }
-        return dp[0][0];
+        return cur[0];
     }
 };
