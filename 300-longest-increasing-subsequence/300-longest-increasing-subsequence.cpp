@@ -1,14 +1,14 @@
 class Solution {
 public:
-    vector<vector<int>> dp;
-    int helper(vector<int>& nums, int ind, int prev_ind){
-        if(ind==nums.size()) return 0;
-        if(dp[ind][prev_ind+1]!=-1) return dp[ind][prev_ind+1];
-        if(prev_ind==-1 || nums[ind]>nums[prev_ind]) return dp[ind][prev_ind+1]=max(helper(nums, ind+1, prev_ind), helper(nums, ind+1, ind)+1);
-        else return dp[ind][prev_ind+1]=helper(nums, ind+1, prev_ind);
-    }
     int lengthOfLIS(vector<int>& nums) {
-        dp.resize(nums.size()+1, vector<int>(nums.size()+1, -1));
-        return helper(nums, 0, -1);
+        vector<vector<int>> dp(nums.size()+1, vector<int>(nums.size()+1, 0));
+        int n = nums.size();
+        for(int ind = n-1; ind>=0; --ind){
+            for(int prev_ind = ind-1; prev_ind>=-1; --prev_ind){
+                if(prev_ind==-1 || nums[ind]>nums[prev_ind]) dp[ind][prev_ind+1]=max(dp[ind+1][prev_ind+1], dp[ind+1][ind+1]+1);
+                else dp[ind][prev_ind+1]=dp[ind+1][prev_ind+1];
+            }
+        }
+        return dp[0][0];
     }
 };
