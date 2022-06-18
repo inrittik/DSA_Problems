@@ -17,9 +17,8 @@ public:
         int r = solve(root->right, res);
         
         int temp = 1+max(l, r);
-        int ans = max(temp,1+l+r);
         
-        res = max(ans, res);
+        res = max(1+l+r, res);
         
         return temp;
     }
