@@ -5,30 +5,27 @@ using namespace std;
  // } Driver Code Ends
 class Solution {
 public:
-    bool isBipartite(vector<int>adj[], vector<int>& color, int i){
-        if(color[i]==-1) color[i]=1;
+    bool bipartite(int i, vector<int>adj[], vector<int>&color){
+        if(color[i]==-1) color[i]=0;
         
-        for(auto it: adj[i]){
+        for(auto it:adj[i]){
             if(color[it]==-1){
-                color[it] = 1-color[i];
-                
-                if(!isBipartite(adj, color, it)) return false;
+                color[it]=1-color[i];
+                if(!bipartite(it, adj, color)) return false;
             }
             else if(color[it]==color[i]) return false;
         }
-        
         return true;
     }
 	bool isBipartite(int V, vector<int>adj[]){
 	    // Code here
-        vector<int> color(V, -1);
-        
-        for(int i=0; i<V; ++i){
-            if(color[i]==-1){
-                if(!isBipartite(adj, color, i)) return false;
-            }
-        }
-        return true;
+	    vector<int> color(V, -1);
+	    for(int i=0; i<V; ++i){
+	        if(color[i]==-1){
+	            if(!bipartite(i, adj, color)) return false;
+	        }
+	    }
+	    return true;
 	}
 
 };
