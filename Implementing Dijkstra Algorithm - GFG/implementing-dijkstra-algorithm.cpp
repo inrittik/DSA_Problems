@@ -18,19 +18,16 @@ class Solution
         pq.push({0, S});
         
         while(!pq.empty()){
-            int  len = pq.top().first;
-            int parent = pq.top().second;
+            auto node = pq.top();
             
             pq.pop();
             
-            for(auto it:adj[parent]){
-                int child = it[0];
-                int weight = it[1];
+            for(auto it:adj[node.second]){
                 
-                if (dist[child]>len+weight)
+                if (dist[it[0]]>node.first+it[1])
                 {
-                    dist[child]=len+weight;
-                    pq.push({dist[child], child});
+                    dist[it[0]]=node.first+it[1];
+                    pq.push({dist[it[0]], it[0]});
                 }
             }
         }
