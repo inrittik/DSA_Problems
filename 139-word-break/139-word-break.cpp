@@ -4,8 +4,9 @@ public:
     bool helper(string s, set<string>& st, int i){
         if(i==s.size()) return true;
         if(mp.count(i)) return mp[i];
+        string temp;
         for(int k=i; k<s.size(); ++k){
-            string temp = s.substr(i, k-i+1);
+            temp.push_back(s[k]);
             if(st.find(temp)!=st.end()) if(helper(s, st, k+1)) return mp[i]=true;
         }
         
