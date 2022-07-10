@@ -2,7 +2,7 @@ class Solution {
 public:
     int ans = 0;
     vector<int> dp;
-    void helper(string s, int i, set<string>& st){
+    void helper(string& s, int i, set<string>& st){
         if(i==s.size()) {
             ans++;
             return;
