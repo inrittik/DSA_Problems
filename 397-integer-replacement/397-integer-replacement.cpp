@@ -1,14 +1,17 @@
 class Solution {
 public:
-    unordered_map<int, int> vis;
-    int integerReplacement(int n) {
+    unordered_map<int, int> dp;
+    int helper(int n){
         if(n==1) return 0;
-        if(vis.count(n)==0){
-            if(n%2==0) return vis[n]=1+integerReplacement(n/2);
-            else{
-                return vis[n]=2+min(integerReplacement(n/2), integerReplacement(n/2+1));
-            }
+        if(dp.count(n)!=0) return dp[n];
+        if(n%2==0) dp[n]=1+helper(n/2);
+        else{
+            dp[n]=2+min(helper(n/2), helper(n/2+1));
         }
-        return vis[n];
+        
+        return dp[n];
+    }
+    int integerReplacement(int n) {
+        return helper(n);
     }
 };
