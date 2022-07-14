@@ -3,11 +3,11 @@ public:
     vector<int> loudAndRich(vector<vector<int>>& richer, vector<int>& quiet) {
         int n = quiet.size();
         vector<int> indegree(n);
-        unordered_map<int, set<int>> g;
+        unordered_map<int, vector<int>> g;
         
         for (auto it: richer) {
             indegree[it[1]]++;
-            g[it[0]].insert(it[1]);
+            g[it[0]].push_back(it[1]);
         }
         
         queue<int> q;
