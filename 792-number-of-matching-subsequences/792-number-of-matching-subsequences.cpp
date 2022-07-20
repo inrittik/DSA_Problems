@@ -13,7 +13,10 @@ public:
             
             for(int i=0; i<word.size(); ++i){
                 auto it = upper_bound(mp[word[i]].begin(), mp[word[i]].end(), curr_idx);
-                if(it==mp[word[i]].end()) flag = 0;
+                if(it==mp[word[i]].end()) {
+                    flag = 0;
+                    break;
+                }
                 else curr_idx = *it;
             }
             
