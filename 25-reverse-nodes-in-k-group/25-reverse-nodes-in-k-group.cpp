@@ -17,7 +17,6 @@ public:
         ListNode* curr = dummy;
         ListNode* prev = dummy;
         ListNode* next = NULL;
-        ListNode* tmp =next;
         int i=0;
         while(curr=curr->next) i++;
         
@@ -26,11 +25,10 @@ public:
             next = curr->next;
             
             for(int j=1;j<k; ++j){
-                tmp= next->next;
+                curr->next = next->next;
                 next->next = prev->next;
                 prev->next = next;
-                curr->next = tmp;
-                next = tmp;
+                next = curr->next;
             }
             prev = curr;
             i-=k;
