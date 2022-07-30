@@ -11,10 +11,12 @@
  */
 class Solution {
 public:
+    unordered_map<TreeNode*, int> mp;
     int height(TreeNode* root){
         if(root==NULL) return 0;
+        if(mp.count(root)) return mp[root];
         
-        return max((height(root->left)), height(root->right))+1;
+        return mp[root]=max((height(root->left)), height(root->right))+1;
     }
     bool isBalanced(TreeNode* root) {
         if(root==NULL) return true;
