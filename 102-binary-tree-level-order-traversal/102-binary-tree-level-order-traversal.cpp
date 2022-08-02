@@ -11,27 +11,37 @@
  */
 class Solution {
 public:
-    void getTree(TreeNode* root, int l, vector<vector<int>> &ans){
-        if(root==NULL) return;
-        ans[l].push_back({root->val});
-        
-        getTree(root->left, l+1, ans);
-        getTree(root->right, l+1, ans);
-    }
     vector<vector<int>> levelOrder(TreeNode* root) {
-        vector<vector<int>> ans(2000);
-        vector<vector<int>> res;
-        int level = 0;
-        if(root==NULL) return res;
-        ans[0].push_back({root->val});
+        vector<vector<int>> ans;
+        if(!root) return ans;
         
-        getTree(root->left, level+1, ans);
-        getTree(root->right, level+1, ans);
+        queue<pair<TreeNode*, int>> q;
+        q.push({root, 1});
+        ans.push_back({root->val});
         
-        int i = 0;
-        while(ans[i].size()>0){
-            res.push_back(ans[i++]);
+        while(!q.empty()){
+            TreeNode* node = q.front().first;
+            int level = q.front().second;
+            q.pop();
+            if(node->left){
+                q.push({node->left, level+1});
+                if(level<=ans.size()-1) {
+                    ans[level].push_back(node->left->val);
+                }
+                else{
+                    ans.push_back(vector<int>(1, node->left->val));
+                }
+            }
+            if(node->right){
+                q.push({node->right, level+1});
+                if(level<=ans.size()-1) {
+                    ans[level].push_back(node->right->val);
+                }
+                else{
+                    ans.push_back(vector<int>(1, node->right->val));
+                }
+            }
         }
-        return res;
+        return ans;
     }
 };
