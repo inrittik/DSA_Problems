@@ -1,24 +1,28 @@
 class Solution {
 public:
-    void formParenthesis(vector<string> &comb, string &osf, int op, int cl, int size){
-        int s=osf.size();
-        if(2*size==s){
-            comb.push_back(osf);
+    void helper(vector<string>& ans, int n, int op, int cl, string& osf){
+        if(op>n) return;
+        
+        if(cl>op) return;
+        
+        if(op==cl && op==n){
+            ans.push_back(osf);
             return;
         }
-        if(op<size){
-            formParenthesis(comb, osf+="(", op+1, cl, size);
-            osf.pop_back();
-        }
-        if(cl<op){
-            formParenthesis(comb, osf+=")", op, cl+1, size);
-            osf.pop_back();
-        }
+        
+        osf += "(";
+        helper(ans, n, op+1, cl, osf);
+        osf.pop_back();
+        osf += ")";
+        helper(ans, n, op, cl+1, osf);
+        osf.pop_back();
+        
+        return;
     }
     vector<string> generateParenthesis(int n) {
-        vector<string> comb;
-        string osf="";
-        formParenthesis(comb, osf, 0, 0, n);
-        return comb;
+        vector<string> ans;
+        string osf = "";
+        helper(ans, n, 0, 0, osf);
+        return ans;
     }
 };
