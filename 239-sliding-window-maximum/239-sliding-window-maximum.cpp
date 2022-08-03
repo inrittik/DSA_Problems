@@ -20,16 +20,14 @@ public:
                 }
                 mx.push_back(nums[j]);
             }
-            if(j-i+1<k){
-                j++;
-            }
-            else if(j-i+1==k){
+            if(j-i+1==k){
                 ans.push_back(mx.front());
                 if(nums[i]==mx.front()){
                     mx.pop_front();
                 }
-                i++, j++;
+                i++;
             }
+            j++;
         }
         return ans;
     }
