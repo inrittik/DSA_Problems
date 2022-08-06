@@ -1,25 +1,31 @@
 class Solution {
 public:
-    int coinChange(vector<int>& arr, int sum) {
-        int n = arr.size();
-        long long dp[n+1][sum+1];
-        for(int i=0;i<=n; ++i){
-            for(int j=0; j<=sum; ++j){
-                if(i==0) dp[i][j]=INT_MAX-1;
-                if(j==0) dp[i][j]=0;
-            }
+    vector<vector<int>> dp;
+    int helper(vector<int>& coins, int amount, int n){
+        if(n>=coins.size()) return INT_MAX-1;
+        if(amount==0) return 0;
+        
+        if(dp[n][amount]!=-1) return dp[n][amount];
+        
+        int pick, notPick;
+        if(coins[n]<=amount){
+            pick = helper(coins, amount-coins[n], n);
+            notPick = helper(coins, amount, n+1);
+            
+            return dp[n][amount]=min(1+pick, notPick);
         }
-        for(int i=1; i<=n; ++i){
-            for(int j=1; j<=sum; ++j){
-                if(arr[i-1]<=j){
-                    dp[i][j]=min(dp[i-1][j], dp[i][j-arr[i-1]]+1);
-                }
-                else{
-                    dp[i][j]=dp[i-1][j];
-                }
-            }
+        else{
+            notPick = helper(coins, amount, n+1);
+            return dp[n][amount]=notPick;
         }
-        if(dp[n][sum]==INT_MAX-1) return -1;
-        return dp[n][sum];
+    }
+    int coinChange(vector<int>& coins, int amount) {
+        int n = coins.size();
+        
+        dp.resize(n, vector<int>(amount+1, -1));
+        
+        int ans = helper(coins, amount, 0);
+        
+        return ans==INT_MAX-1?-1:ans;
     }
 };
