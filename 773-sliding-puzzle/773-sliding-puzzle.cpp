@@ -5,19 +5,18 @@ public:
         vector<vector<int>> moves = {{1,3},{0,2,4},{1,5},{0,4},{1,3,5},{2,4}};
         
         string str = "";
+        int ind;
         for(int i=0; i<2; ++i){
             for(int j=0; j<3; ++j){
-                str+=to_string(board[i][j]);
+                str+=(board[i][j]+'0');
+                if(board[i][j]==0){
+                    ind = i*3+j;
+                }
             }
         }
         if(str==res) return 0;
         queue<pair<string, int>> q;
-        for(int i=0; i<6; ++i){
-            if(str[i]=='0') {
-                q.push({str,i});
-                break;
-            }
-        }
+        q.push({str,ind});
         unordered_map<string,int> mp;
         mp[str]++;
         int depth = 0;
