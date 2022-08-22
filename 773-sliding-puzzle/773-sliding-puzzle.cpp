@@ -28,7 +28,7 @@ public:
                 string curr = q.front().first;
                 int ind = q.front().second;
                 q.pop();
-                // cout<<curr<<endl;
+
                 for(int it:moves[ind]){
                     string tmp = curr;
                     swap(tmp[ind], tmp[it]);
