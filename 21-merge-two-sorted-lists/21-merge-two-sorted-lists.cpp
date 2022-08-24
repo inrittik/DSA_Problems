@@ -15,9 +15,7 @@ public:
         if(l2==NULL) return l1;
         
         if(l1->val>l2->val){
-            ListNode* tmp = l1;
-            l1 = l2;
-            l2 = tmp;
+            swap(l1, l2);
         }
         ListNode* res = l1;
         while(l1 && l2){
