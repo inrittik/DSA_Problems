@@ -1,7 +1,6 @@
 class SmallestInfiniteSet {
 public:
     set<int, greater<int>> popped;
-    set<int> added;
     SmallestInfiniteSet() {
         
     }
