@@ -1,7 +1,7 @@
 class Solution {
 public:
     int threeSumClosest(vector<int>& nums, int target) {
-        sort(nums.begin(), nums.end());
+       sort(nums.begin(), nums.end());
         int n=nums.size();
         int mnSum = abs(target-(nums[n-1]+nums[n-2]+nums[n-3]));
         int sign = 1;
@@ -32,6 +32,6 @@ public:
                 else if(hi==i) hi--;
             }
         }
-        return target+mnSum*sign;
+        return target+mnSum*sign; 
     }
 };
