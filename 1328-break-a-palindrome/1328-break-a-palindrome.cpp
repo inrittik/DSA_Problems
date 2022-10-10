@@ -1,8 +1,7 @@
 class Solution {
 public:
     string breakPalindrome(string p) {
-        string res = "";
-        if(p.size()==1) return res;
+        if(p.size()==1) return "";
         else{
             bool flag = false;
             for(int i=0; i<p.size()/2; ++i){
