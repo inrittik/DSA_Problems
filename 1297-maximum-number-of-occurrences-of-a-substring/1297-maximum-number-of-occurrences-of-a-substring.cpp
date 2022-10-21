@@ -20,9 +20,7 @@ public:
     }
     int maxFreq(string s, int mxL, int mnS, int mxS) {
         int mxOc = 0;
-        for(int i=mnS; i<=mxS; ++i){
-            mxOc = max(mxOc, findOc(s, i, mxL));
-        }
+        mxOc = max(mxOc, findOc(s, mnS, mxL));
         return mxOc;
     }
 };
