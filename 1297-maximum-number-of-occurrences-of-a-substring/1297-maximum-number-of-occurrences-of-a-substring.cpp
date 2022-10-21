@@ -7,12 +7,10 @@ public:
         int i=0, j = 0;
         while(j<n){
             cmp[s[j]]++;
-            if((j-i+1)==l && cmp.size()<=u){
-                mx = max(mx, ++mp[s.substr(i, l)]);
-                if(--cmp[s[i]]==0) cmp.erase(s[i]);
-                i++;
-            }
-            else if((j-i+1)==l){
+            if((j-i+1)==l){
+                if(cmp.size()<=u){
+                    mx = max(mx, ++mp[s.substr(i, l)]);
+                }
                 if(--cmp[s[i]]==0) cmp.erase(s[i]);
                 i++;
             }
