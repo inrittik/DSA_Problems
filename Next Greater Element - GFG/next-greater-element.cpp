@@ -1,36 +1,32 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 #include<bits/stdc++.h>
 using namespace std;
 
 
- // } Driver Code Ends
-class Solution
-{
-    public:
-    //Function to find the next greater element for each element of the array.
-    vector<long long> nextLargerElement(vector<long long> arr, int n){
+// } Driver Code Ends
+// User Function Template for C++ solution
+
+class Solution {
+  public:
+    vector<long long> nextLargerElement(vector<long long> &arr, int n){
         // Your code here
-        vector<long long> ans(n);
         stack<long long> st;
-        
+        vector<long long> ans(n);
         for(int i=n-1; i>=0; --i){
-            while(!st.empty() && st.top()<=arr[i]){
+            while(!st.empty() && arr[i]>=st.top()){
                 st.pop();
             }
             if(st.empty()){
-                ans[i]=-1;
+                ans[i] = -1;
             }
-            else{
-                ans[i]=st.top();
-            }
+            else ans[i] = st.top();
             st.push(arr[i]);
         }
-        
         return ans;
     }
 };
 
-// { Driver Code Starts.
+//{ Driver Code Starts.
 
 int main()
 {
@@ -45,10 +41,13 @@ int main()
         for(int i=0;i<n;i++)
             cin>>arr[i];
         
-        Solution obj;
-        vector <long long> res = obj.nextLargerElement(arr, n);
+        Solution ob;
+        
+        vector <long long> res = ob.nextLargerElement(arr, n);
         for (long long i : res) cout << i << " ";
         cout<<endl;
     }
 	return 0;
-}  // } Driver Code Ends
+}
+
+// } Driver Code Ends
